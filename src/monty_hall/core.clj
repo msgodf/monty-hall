@@ -55,3 +55,6 @@
        (group-by identity)
        (map (fn [[k v]] [k (count v)]))
        (into {})))
+
+#_(simulate stick 1000);;=>{:goat 672, :car 328}
+#_(simulate switch 1000);;=>{:car 669, :goat 331}
