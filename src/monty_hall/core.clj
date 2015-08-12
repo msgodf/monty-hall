@@ -41,21 +41,17 @@
                 door-choice)))))
 
 (defn run
-  [should-switch]
+  [strategy]
   (let [world (generate-world (rand-int 3))
         door-choice (rand-int 3)]
-    (if should-switch
-      (switch world
+    (strategy world
               door-choice
-              (monty-hall world door-choice))
-      (stick world
-             door-choice
-             (monty-hall world door-choice)))))
+              (monty-hall world door-choice))))
 
 (defn simulate
-  [should-switch n]
+  [strategy n]
   (->> (range n)
-       (map (fn [_] (run should-switch)))
+       (map (fn [_] (run strategy)))
        (group-by identity)
        (map (fn [[k v]] [k (count v)]))
        (into {})))
